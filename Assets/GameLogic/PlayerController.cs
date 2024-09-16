@@ -6,6 +6,11 @@ public class PlayerController : MonoBehaviour
 {
 
     public float moveForce = 10f;
+    public float detectForce = 100f;
+    public float maxSpeed = 10f;
+    public float turnSpeed = 100f;
+
+
     private Rigidbody rb;
     private float TimeSinceLastPress = 0f;
     private bool startCounting = false;
@@ -29,7 +34,7 @@ public class PlayerController : MonoBehaviour
             MoveForward();
         }
 
-        if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S))
+        if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.F) || Input.GetKeyUp(KeyCode.G) || Input.GetKeyUp(KeyCode.H) || Input.GetKeyUp(KeyCode.J) || Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.L))
         {
             startCounting = true;
         }
@@ -40,27 +45,101 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.S) && (!Input.GetKey(KeyCode.A)));
+        if (Input.GetKey(KeyCode.S) && (!Input.GetKey(KeyCode.A)))
         {
-            rb.AddForce(transform.forward * (10f / TimeSinceLastPress)  , ForceMode.Force);
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress)  , ForceMode.Force);
             startCounting = false;
             TimeSinceLastPress = 0;
         }
 
-        if (Input.GetKey(KeyCode.D) && (!Input.GetKey(KeyCode.S))) ;
+        if (Input.GetKey(KeyCode.D) && (!Input.GetKey(KeyCode.S))) 
         {
-            rb.AddForce(transform.forward * (10f / TimeSinceLastPress), ForceMode.Force);
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
             startCounting = false;
             TimeSinceLastPress = 0;
         }
+
+        if (Input.GetKey(KeyCode.F) && (!Input.GetKey(KeyCode.D)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+
+        if (Input.GetKey(KeyCode.G) && (!Input.GetKey(KeyCode.F)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+
+        if (Input.GetKey(KeyCode.H) && (!Input.GetKey(KeyCode.G)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+
+        if (Input.GetKey(KeyCode.J) && (!Input.GetKey(KeyCode.H)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+        if (Input.GetKey(KeyCode.K) && (!Input.GetKey(KeyCode.J)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+        if (Input.GetKey(KeyCode.L) && (!Input.GetKey(KeyCode.K)))
+        {
+            rb.AddForce(transform.forward * (detectForce / TimeSinceLastPress), ForceMode.Force);
+            startCounting = false;
+            TimeSinceLastPress = 0;
+        }
+
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            TurnLeft();
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            TurnRight();
+        }
+
+
+        ClampSpeed();
 
 
     }
-
+    void ClampSpeed()
+    {
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+    }
 
     void MoveForward()
     {
-
-        rb.AddForce(transform.forward * moveForce, ForceMode.Force);
+        //rb.velocity = Vector3.forward * moveForce;
+        rb.AddForce(transform.forward * moveForce, ForceMode.Acceleration);
     }
+
+    // Function to turn the object left
+    void TurnLeft()
+    {
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, -turnSpeed * Time.deltaTime, 0f));
+    }
+
+    // Function to turn the object right
+    void TurnRight()
+    {
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnSpeed * Time.deltaTime, 0f));
+    }
+
+
 }
