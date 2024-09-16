@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
     private float TimeSinceLastPress = 0f;
     private bool startCounting = false;
 
+
+    private float TimeSinceLastPressLeft = 0f;
+    private bool startCountingLeft = false;
+    private float TurnLeftCounter = 0f;
+    public  float TurnModify = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,12 +106,57 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.X))
         {
             TurnLeft();
+            startCountingLeft = true;
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if(Input.GetKeyUp(KeyCode.Z) )
+        {
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.X) && (!Input.GetKey(KeyCode.Z)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if(TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
+  
+            TimeSinceLastPressLeft = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.C) && (!Input.GetKey(KeyCode.X)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if (TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
+
+            TimeSinceLastPressLeft = 0;
+
+        }
+
+        if (TurnLeftCounter >= 0)
+        {
+            Debug.Log(TurnLeftCounter);
+            TurnLeft();
+            TurnLeftCounter -= Time.deltaTime; 
+        }
+
+
+        if (startCountingLeft)
+        {
+            TimeSinceLastPressLeft += Time.deltaTime;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             TurnRight();
         }
@@ -129,13 +180,12 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(transform.forward * moveForce, ForceMode.Acceleration);
     }
 
-    // Function to turn the object left
     void TurnLeft()
     {
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, -turnSpeed * Time.deltaTime, 0f));
     }
 
-    // Function to turn the object right
+
     void TurnRight()
     {
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnSpeed * Time.deltaTime, 0f));
