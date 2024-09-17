@@ -19,8 +19,13 @@ public class DeathDetect : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        if(collision.gameObject.tag != "Win")
+        {
+
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        }
+
     }
 
 }

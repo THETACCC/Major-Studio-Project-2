@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     private float TurnLeftCounter = 0f;
     public  float TurnModify = 1f;
 
+    private float TimeSinceLastPressRight = 0f;
+    private bool startCountingRight = false;
+    private float TurnRightCounter = 0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,16 +111,12 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.V) || Input.GetKeyUp(KeyCode.B) || Input.GetKeyUp(KeyCode.N) || Input.GetKeyUp(KeyCode.M))
         {
             TurnLeft();
             startCountingLeft = true;
         }
 
-        if(Input.GetKeyUp(KeyCode.Z) )
-        {
-
-        }
 
         if (Input.GetKeyDown(KeyCode.X) && (!Input.GetKey(KeyCode.Z)))
         {
@@ -141,7 +142,54 @@ public class PlayerController : MonoBehaviour
             TimeSinceLastPressLeft = 0;
 
         }
+        if (Input.GetKeyDown(KeyCode.V) && (!Input.GetKey(KeyCode.C)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if (TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
 
+            TimeSinceLastPressLeft = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.B) && (!Input.GetKey(KeyCode.V)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if (TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
+
+            TimeSinceLastPressLeft = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.N) && (!Input.GetKey(KeyCode.B)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if (TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
+
+            TimeSinceLastPressLeft = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.M) && (!Input.GetKey(KeyCode.N)))
+        {
+            TurnLeftCounter = TurnModify / TimeSinceLastPressLeft;
+            if (TurnLeftCounter >= 0.2f)
+            {
+                TurnLeftCounter = 0.2f;
+            }
+            startCountingLeft = false;
+
+            TimeSinceLastPressLeft = 0;
+
+        }
         if (TurnLeftCounter >= 0)
         {
             Debug.Log(TurnLeftCounter);
@@ -156,11 +204,139 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Q))
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.P))
         {
             TurnRight();
+            startCountingRight = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.W) && (!Input.GetKey(KeyCode.Q)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.E) && (!Input.GetKey(KeyCode.W)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.R) && (!Input.GetKey(KeyCode.E)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.T) && (!Input.GetKey(KeyCode.R)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Y) && (!Input.GetKey(KeyCode.T)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.U) && (!Input.GetKey(KeyCode.Y)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.I) && (!Input.GetKey(KeyCode.U)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.O) && (!Input.GetKey(KeyCode.I)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+        if (Input.GetKeyDown(KeyCode.P) && (!Input.GetKey(KeyCode.O)))
+        {
+            TurnRightCounter = TurnModify / TimeSinceLastPressRight;
+            if (TurnRightCounter >= 0.2f)
+            {
+                TurnRightCounter = 0.2f;
+            }
+            startCountingRight = false;
+
+            TimeSinceLastPressRight = 0;
+
+        }
+
+
+
+        if (TurnRightCounter >= 0)
+        {
+            Debug.Log(TurnRightCounter);
+            TurnRight();
+            TurnRightCounter -= Time.deltaTime;
+        }
+
+
+        if (startCountingRight)
+        {
+            TimeSinceLastPressRight += Time.deltaTime;
+        }
 
         ClampSpeed();
 
